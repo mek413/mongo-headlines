@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 
 var axios = require("axios");
 var cheerio = require("cheerio");
+var path = require("path");
 
 // Require all models
 var db = require("./models");
@@ -46,7 +47,8 @@ app.get("/scrape", function(req, res) {
     results.push({
       title: title,
       link: link,
-      summary: summary
+      summary: summary,
+      isItSaved: false
     });
   });
    db.Article.create(results).then(function(dbArticle){
@@ -57,6 +59,42 @@ app.get("/scrape", function(req, res) {
     })
   })
 });
+app.put("/api/headlines/:id",function(req,res){
+  db.Article.findOneAndUpdate({ _id: req.params.id }, { isItSaved: req.body.saved }, { new: true })
+  .then(function(dbArticle){
+    console.log(dbArticle)
+  })
+});
+app.get("/articles",function(req,res){
+  db.Article.find({})
+  .then(function(dbArticle){
+    res.json(dbArticle)
+  })
+})
+app.get("/savedArticles",function(req,res){
+  db.Article.find({isItSaved : true})
+  .then(function(dbArticle){
+    res.json(dbArticle)
+  })
+})
+app.delete("/clear", function(req,res){
+  db.Article.remove({})
+  .then(console.log("Articles Cleared"))
+})
+  // Load index page
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+    });
+
+  // Load example page and pass in an example by id
+  app.get("/saved", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/saved.html"));
+    });
+  // Render 404 page for any unmatched routes
+  app.get("*", function(req, res) {
+    res.render("404");
+  });
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
 });
+module.exports = app;

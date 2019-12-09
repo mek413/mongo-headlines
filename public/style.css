@@ -51,4 +51,36 @@
   .jumbotron p {
     font-size: 30px;
   }
-  
+  .card {
+    margin-bottom: 2%;
+    box-shadow: 10px 5px 20px 2px lightslategrey;
+  }
+  .card .card-header {
+    background-color: black;
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .card .card-header h3 {
+    color: white;
+  }
+  .card .card-header .btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+}
+.card .card-header .btn.delete {
+  right: 160px;
+}
+.card .card-header .btn.notes {
+  background-color: purple;
+}
+.card .card-header .article-link {
+  color: white;
+  display: inline-block;
+  width: 70%;
+}
+.card .card-body {
+  font-size: 16px;
+}
