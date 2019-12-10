@@ -9,4 +9,4 @@ The web application uses cheerio js to scrape the articles and stores them in th
 
 ## Individual Responsibilities.
 My resposibilities were to design the look of the site and write the general logic for the app.
-Also, I was resposible for general debugging the app.
+Also, I was responsible for general debugging of the application.
