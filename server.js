@@ -111,6 +111,11 @@ app.delete("/deleteNote/:id", function(req,res){
   db.Note.remove({ _id: req.params.id})
   .then(console.log("Note Deleted"))
 })
+app.delete("/deleteArticle/:id", function(req,res){
+  db.Article.remove({ _id: req.params.id})
+  .then(console.log("Article Deleted"))
+})
+
   // Load index page
   app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));

@@ -7,7 +7,7 @@ window.onload = function(){
                 let headerConent = $("<a>").attr({"class": "article-link","target": "_blank", "rel": "noopener noreferrer", "href": data[i].link
                 }).text(data[i].title);
                 let cardHeaderButton = $("<a>").addClass("btn btn-danger delete").text("DELETE FROM SAVED");
-                let cardHeaderButtonTwo = $("<a>").addClass("btn btn-dark notes").text("Article Notes");
+                let cardHeaderButtonTwo = $("<a>").addClass("btn btn-dark notes").text("ARTICLE NOTES");
                 cardHeaderButtonTwo.attr({"data-toggle":"modal" , "data-target":"#myModal"})
                 cardHeader.append(headerConent,cardHeaderButton,cardHeaderButtonTwo);
                 cardHeaderDiv.append(cardHeader);
@@ -17,10 +17,11 @@ window.onload = function(){
         }
     })
 }
-$(document).on("click", ".clear", clearAll)
-$(document).on("click", ".btn.notes", grabNotes)
-$(document).on("click", ".btn.noteSave", saveNotes)
-$(document).on("click", ".btn.note-delete", deleteNote)
+$(document).on("click", ".clear", clearAll);
+$(document).on("click", ".btn.notes", grabNotes);
+$(document).on("click", ".btn.noteSave", saveNotes);
+$(document).on("click", ".btn.note-delete", deleteNote);
+$(document).on("click", ".btn.delete", deleteArticle);
 
 function clearAll(){
     $(".article-container").empty();
@@ -34,10 +35,20 @@ function clearAll(){
 function deleteNote(){
     $(this).parents(".note").empty();
     var selectedNote = $(this).data()
-    console.log(selectedNote.id)
     $.ajax({
         method: "DELETE",
         url: "/deleteNote/" + selectedNote.id
+      }).then(function(data) {
+      });
+}
+
+function deleteArticle(){
+    $(this).parents(".card").remove();
+    var selectedArticle = $(this).parents(".card").data()
+    console.log(selectedArticle.id)
+    $.ajax({
+        method: "DELETE",
+        url: "/deleteArticle/" + selectedArticle.id
       }).then(function(data) {
       });
 }

@@ -2,7 +2,7 @@ window.onload = function(){
     $.get("/articles",function(data){
         for (let i = 0;i<data.length;i++) {
             if (i < 10 ){
-                if (data[i].isItSaved == false){
+                if (data[i].isItSaved == false && data[i].title !== ""){
                 let card = $("<div>").attr({"class": "card", "data-id": data[i]._id});
                 let cardHeaderDiv =  $("<div>").addClass("card-header");
                 let cardHeader = $("<h3>");
@@ -41,7 +41,6 @@ function articleSaver(){
     url: "/api/headlines/" + savedArticle.id,
     data: savedArticle
   }).then(function(data) {
-      console.log("saved")
   });
 
     
