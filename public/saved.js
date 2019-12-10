@@ -8,6 +8,7 @@ window.onload = function(){
                 }).text(data[i].title);
                 let cardHeaderButton = $("<a>").addClass("btn btn-danger delete").text("DELETE FROM SAVED");
                 let cardHeaderButtonTwo = $("<a>").addClass("btn btn-dark notes").text("Article Notes");
+                cardHeaderButtonTwo.attr({"data-toggle":"modal" , "data-target":"#myModal"})
                 cardHeader.append(headerConent,cardHeaderButton,cardHeaderButtonTwo);
                 cardHeaderDiv.append(cardHeader);
                 let cardBodyDiv = $("<div>").addClass("card-body").text(data[i].summary);
@@ -17,6 +18,8 @@ window.onload = function(){
     })
 }
 $(document).on("click", ".clear", clearAll)
+$(document).on("click", ".btn.notes", grabNotes)
+$(document).on("click", ".btn.noteSave", saveNotes)
 function clearAll(){
     $(".article-container").empty();
     $.ajax({
@@ -24,4 +27,41 @@ function clearAll(){
         url: "/clear"
       }).then(function(data) {
       });
+}
+function grabNotes(){
+    var article = $(this)
+    .parents(".card")
+    .data()
+    $.get("/getNotes/" + article.id ,function(data){
+        $(".modal-title").attr("data-id", article.id).text("Notes For Article:" + article.id);
+        console.log(data)
+    })
+}
+
+function saveNotes(){
+        function validate(){
+            var isValid = true;
+            
+            if ($(".noteEntry").val().trim() === ""){
+                
+             isValid = false;
+        }
+            return isValid;
+        }
+            
+        if (validate()){
+            var thisId = $(".modal-title").attr("data-id")
+            $.ajax({
+                method: "POST",
+                url: "/articles/" + thisId,
+                data: {
+                    body: $(".noteEntry").val().trim()
+                }
+              }).then(function(data) {
+              });
+      }else {
+          (alert("Please fill out all fields!"));
+    }
+    
+    $(".noteEntry").empty();
 }
