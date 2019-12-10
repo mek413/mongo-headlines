@@ -1,28 +1,12 @@
 # Project Name
-hot-resturant
+Mongo Headlines
 
 ## Description
-One or two sentences summarizing your project. This should be more
-interesting than technical.
-
-## Motivation
-Two or three sentences describing the problem the project solves.
+A web application thats scrapes articles from the la times website. The web app allows the user to save and clear articles. Also the user can even write notes for their saved article.
 
 ## Results
-One or two sentences describing the end result—in other words.
-
-## Team Efforts
-Describe how you delegated work amongst your team members.
+The web application uses cheerio js to scrape the articles and stores them in the mongo database.
 
 ## Individual Responsibilities.
-Describe what you contributed to the project as an
-individual—in other words, the parts of the project that you were accountable for.
-
-### Challenges
-Describe any challenges you and/or your team encountered
-that you personally played an important role in resolving.
-
-## Improvements
-Describe changes you would make going forward. These can be
-changes you’d make for better scalability; additional features you’d add; improvements
-you’d make to the codebase; etc.
+My resposibilities were to design the look of the site and write the general logic for the app.
+Also, I was resposible for general debugging the app.
