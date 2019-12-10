@@ -95,8 +95,6 @@ app.post("/articles/:id", function(req, res) {
        return db.Article.findOneAndUpdate({ _id: req.params.id }, {"$push": {note: dbNote._id}}, { new: true });
     })
     .then(function(dbArticle) {
-      // If we were able to successfully update an Article, send it back to the client
-      
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -106,6 +104,12 @@ app.post("/articles/:id", function(req, res) {
 app.delete("/clear", function(req,res){
   db.Article.remove({})
   .then(console.log("Articles Cleared"))
+  db.Note.remove({})
+  .then(console.log("Notes Cleared"))
+})
+app.delete("/deleteNote/:id", function(req,res){
+  db.Note.remove({ _id: req.params.id})
+  .then(console.log("Note Deleted"))
 })
   // Load index page
   app.get("/", function(req, res) {

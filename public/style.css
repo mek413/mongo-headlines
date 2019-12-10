@@ -84,3 +84,19 @@
 .card .card-body {
   font-size: 16px;
 }
+textarea {
+  padding: 10px;
+  resize: none;
+  width: 100%;
+}
+.modal-body .btn {
+  float: right;
+  margin: 5px;
+}
+.note.list-group-item .btn {
+  position: relative;
+  bottom: 10px;
+}
+.note.list-group-item {
+  text-align: center;
+}

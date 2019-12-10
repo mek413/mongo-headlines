@@ -20,6 +20,8 @@ window.onload = function(){
 $(document).on("click", ".clear", clearAll)
 $(document).on("click", ".btn.notes", grabNotes)
 $(document).on("click", ".btn.noteSave", saveNotes)
+$(document).on("click", ".btn.note-delete", deleteNote)
+
 function clearAll(){
     $(".article-container").empty();
     $.ajax({
@@ -28,13 +30,33 @@ function clearAll(){
       }).then(function(data) {
       });
 }
+
+function deleteNote(){
+    $(this).parents(".note").empty();
+    var selectedNote = $(this).data()
+    console.log(selectedNote.id)
+    $.ajax({
+        method: "DELETE",
+        url: "/deleteNote/" + selectedNote.id
+      }).then(function(data) {
+      });
+}
+
 function grabNotes(){
+    $('.note-container').empty();
     var article = $(this)
     .parents(".card")
     .data()
     $.get("/getNotes/" + article.id ,function(data){
         $(".modal-title").attr("data-id", article.id).text("Notes For Article:" + article.id);
-        console.log(data)
+        for(let i = 0; i<data.note.length;i++){
+            let note = $("<li>").addClass("list-group-item note").text(data.note[i].body)
+            note.append(
+            $("<button>").attr({"class":"btn btn-danger note-delete","data-id": data.note[i]._id})
+            .text("x")
+            )
+            $(".note-container").append(note)
+        }
     })
 }
 
@@ -63,5 +85,5 @@ function saveNotes(){
           (alert("Please fill out all fields!"));
     }
     
-    $(".noteEntry").empty();
+    $(".noteEntry").val('');
 }
