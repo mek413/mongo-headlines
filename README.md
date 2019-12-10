@@ -26,7 +26,3 @@ that you personally played an important role in resolving.
 Describe changes you would make going forward. These can be
 changes you’d make for better scalability; additional features you’d add; improvements
 you’d make to the codebase; etc.
-
-## DELETE THIS SECTION
-After compiling this information for each project, use it to rehearse your answer to the question:
-_“Tell me about a technical project you’ve worked on”_. You should be able to cover the first three points in less than **45 seconds**, and summarize the last three in **approximately a minute**. You should, however, be able to further elaborate on improvements; challenges; and individual responsibilities if prompted.
